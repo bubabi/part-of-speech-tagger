@@ -1,7 +1,10 @@
 import operator
 
+import numpy as np
+
 from hmm_builder import HMMBuilder
 from parser import InputParser
+from viterbi import Viterbi
 
 path = "./metu.txt"
 
@@ -25,3 +28,10 @@ if __name__ == '__main__':
     transition_probability = hmm_builder.build_transition_probability()
     emission_probability = hmm_builder.build_emission_probability()
 
+    state_size = len(transition_probability.keys())
+    tag_labels = list(transition_probability.keys())
+    viterbi = Viterbi(state_size, transition_probability, emission_probability, tag_labels)
+
+    viterbi.run(["kapının", "kenarındaki", "kadın"])
+    l = viterbi.backtracking()
+    print(l)

@@ -25,3 +25,5 @@ class HMMBuilder(object):
             for word in word_counts.keys():
                 emission_probability[tag][word] = self.emission_counts[tag][word] / tag_count
         return emission_probability
+
+
