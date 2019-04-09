@@ -15,15 +15,15 @@ class HMMBuilder(object):
         for pre_tag, post_tag_counts in self.transition_counts.items():
             pre_tag_count = self.get_tag_count(pre_tag)
             for post_tag, count in post_tag_counts.items():
+                #print(pre_tag, post_tag, count)
+                #print(self.transition_counts[pre_tag][post_tag])
+                #if pre_tag == '<s>': pre_tag_count = 1
                 transition_probability[pre_tag][post_tag] = self.transition_counts[pre_tag][post_tag] / pre_tag_count
         return transition_probability
 
     def build_emission_probability(self):
         emission_probability = defaultdict(dict)
         for tag, word_counts in self.emission_counts.items():
-            tag_count = self.get_tag_count(tag)
             for word in word_counts.keys():
-                emission_probability[tag][word] = self.emission_counts[tag][word] / tag_count
+                emission_probability[tag][word] = self.emission_counts[tag][word] / sum(self.emission_counts[tag].values())
         return emission_probability
-
-

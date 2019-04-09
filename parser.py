@@ -21,6 +21,7 @@ class InputParser(object):
         return transition_pairs
 
     def get_emission_counts(self):
+        corpus = set()
         tags = list()
         emission_pairs = defaultdict(dict)
         for line in self.data:
@@ -28,7 +29,7 @@ class InputParser(object):
             for element in words_with_tag:
                 pairs = element.split("/")
                 word = pairs[0].lower()
+                corpus.add(word)
                 tag = pairs[1]
                 emission_pairs[tag][word] = emission_pairs.get(tag, {}).get(word, 0) + 1
-
-        return emission_pairs
+        return emission_pairs, len(corpus)
