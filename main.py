@@ -23,15 +23,18 @@ if __name__ == '__main__':
 
     parser = InputParser(train_set)
     transition_counts = parser.get_transition_counts()
-    emission_counts, corpus_size = parser.get_emission_counts()
+    emission_counts, corpus = parser.get_emission_counts()
 
     hmm_builder = HMMBuilder(transition_counts, emission_counts)
     transition_probability = hmm_builder.build_transition_probability()
     emission_probability = hmm_builder.build_emission_probability()
 
+    once_words = hmm_builder.get_only_once_words()
+
     state_size = len(transition_probability.keys())
     tag_labels = list(transition_probability.keys())
-    viterbi = Viterbi(state_size, transition_probability, transition_counts, emission_probability, emission_counts, tag_labels, corpus_size)
+    viterbi = Viterbi(state_size, transition_probability, transition_counts, emission_probability,
+                        emission_counts, tag_labels, corpus, once_words)
 
     # viterbi.run(["bu", "şekilde", "burak", "geldi"])
     # l = viterbi.backtracking()

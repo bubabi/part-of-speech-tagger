@@ -1,7 +1,6 @@
 from collections import defaultdict
 from typing import Optional
 
-
 class InputParser(object):
 
     def __init__(self, data):
@@ -32,4 +31,4 @@ class InputParser(object):
                 corpus.add(word)
                 tag = pairs[1]
                 emission_pairs[tag][word] = emission_pairs.get(tag, {}).get(word, 0) + 1
-        return emission_pairs, len(corpus)
+        return emission_pairs, corpus

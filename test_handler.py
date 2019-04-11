@@ -1,3 +1,4 @@
+
 class TestHandler(object):
 
     def __init__(self, test_set, viterbi):
@@ -20,11 +21,13 @@ class TestHandler(object):
 
             self.viterbi.run(sentence)
             l = self.viterbi.backtracking()
+
             for i in range(len(sentence)):
                 if only_tag_sequence[i] == l[i]:
                     num_of_true += 1
                     num_of_words += 1
                 else:
+                    #print("FALSE:", l[i])
                     num_of_words += 1
 
         print(num_of_true, num_of_words)
