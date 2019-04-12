@@ -29,8 +29,6 @@ class TestHandler(object):
                     num_of_true += 1
                     num_of_words += 1
                 else:
-                    # if only_tag_sequence[i] == "Num":
-                    #     print("WORD", sentence[i], "TRUE", only_tag_sequence[i], "FALSE:", l[i])
                     num_of_words += 1
                 f.write(str(num_of_words) + "," + l[i] + "\n")
         f.close()

@@ -23,29 +23,6 @@ class Viterbi(object):
     def get_transition_tag_count(self, tag):
         return sum(self.transition_counts[tag].values())
 
-    def emission_start_with(self, tag_a):
-        bigram_starts_with_tag = len([tag_b for tag_b, count in self.transition_counts[tag_a].items() if count > 0])
-        return bigram_starts_with_tag
-
-    def emission_end_with(self, tag_b):
-        bigram_ends_with_tag = len([count for tag_one, count in self.transition_counts.items() if count.get(tag_b, 0) > 0])
-        return bigram_ends_with_tag
-
-    def num_of_emission_combinations(self):
-        return len(self.emission_counts) ** 2
-
-    def get_smoothed_emission(self, tag, word):
-        times_tag_occurs = self.get_emission_tag_count(tag)
-        term_a = max((self.emission_counts[tag].get(word, 0) - 0.75), 0) / times_tag_occurs
-
-        lambda_parameter = 0.75 / times_tag_occurs * self.emission_start_with(pre_tag)
-        p_continuation = self.emission_end_with(post_tag) / self.num_of_emission_combinations()
-
-        return term_a + (lambda_parameter * p_continuation)
-
-    def _get_s_e(self, q, sentence, t):
-        pass
-
     def good_turing_smoothing(self, q):
         return (self.once_words.get(q, 0)) / (len(self.unk_words)*self.get_emission_tag_count(q))
 
