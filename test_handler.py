@@ -6,6 +6,8 @@ class TestHandler(object):
         self.viterbi = viterbi
 
     def parse(self):
+        f = open('predicted_tags.csv', 'w')
+        f.write("Id,Category\n")
         num_of_true = 0
         num_of_words = 0
         for line in self.test_set:
@@ -27,13 +29,10 @@ class TestHandler(object):
                     num_of_true += 1
                     num_of_words += 1
                 else:
-                    #print("FALSE:", l[i])
+                    # if only_tag_sequence[i] == "Num":
+                    #     print("WORD", sentence[i], "TRUE", only_tag_sequence[i], "FALSE:", l[i])
                     num_of_words += 1
-
-        print(num_of_true, num_of_words)
-        print((100*num_of_true) / num_of_words)
-
-        # print(sentence)
-        # print(l)
-        # print(only_tag_sequence)
-        # print()
+                f.write(str(num_of_words) + "," + l[i] + "\n")
+        f.close()
+        print("# of Correct Found Tags:", num_of_true, "\n# of Total Words", num_of_words)
+        print("Accuracy:", (100*num_of_true) / num_of_words)

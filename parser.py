@@ -15,7 +15,7 @@ class InputParser(object):
             for i in range(len(words_with_tag)-1):
                 pre_tag = words_with_tag[i].split("/")[1]
                 post_tag = words_with_tag[i+1].split("/")[1]
-                transition_pairs[pre_tag][post_tag] = transition_pairs.get(pre_tag, {}).get(post_tag, 0) + 1
+                transition_pairs[pre_tag][post_tag] = transition_pairs.get(pre_tag, {}).get(post_tag, 0) + 1 # increased transition value by 1
 
         return transition_pairs
 
@@ -30,5 +30,5 @@ class InputParser(object):
                 word = pairs[0].lower()
                 corpus.add(word)
                 tag = pairs[1]
-                emission_pairs[tag][word] = emission_pairs.get(tag, {}).get(word, 0) + 1
+                emission_pairs[tag][word] = emission_pairs.get(tag, {}).get(word, 0) + 1 # increased emission value by 1
         return emission_pairs, corpus
